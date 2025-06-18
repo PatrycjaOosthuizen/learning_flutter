@@ -1,16 +1,32 @@
-# dicee
+# Dicee - A Simple Dice Rolling App
 
-A new Flutter project.
+This is a basic Flutter app that simulates rolling two dice. When you tap on either dice image, both dice faces change randomly.
+
+## Features
+
+- Two dice displayed side-by-side
+- Tap on any dice to roll both dice
+- Random dice faces between 1 and 6
+- Simple, clean red-themed UI
+
+## How It Works
+
+- The app uses a `StatefulWidget` to maintain the state of the dice numbers.
+- Pressing either dice triggers the `changeDiceFace` function.
+- `changeDiceFace` updates both dice numbers to random values between 1 and 6.
+- Dice images update accordingly using the `Image.asset` widget.
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+1. Make sure you have Flutter installed and set up.
+2. Add dice images named `dice1.png` to `dice6.png` in an `images` folder inside your project.
+3. Run the app on your emulator or physical device.
+4. Tap the dice to roll!
 
-A few resources to get you started if this is your first Flutter project:
+## Screenshots
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+![Dicee App Screenshot](images/Screenshot.png)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+---
+
+Created as part of my Flutter learning journey.
