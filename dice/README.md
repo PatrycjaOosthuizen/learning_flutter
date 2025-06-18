@@ -25,7 +25,7 @@ This is a basic Flutter app that simulates rolling two dice. When you tap on eit
 
 ## Screenshots
 
-![Dicee App Screenshot](images/Screenshot.png)
+![Dicee App Screenshot](images/screenshot.png)
 
 ---
 
