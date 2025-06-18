@@ -1,0 +1,12 @@
+# Flutter build & dependency files
+**/build/
+**/.dart_tool/
+**/.idea/
+**/.packages
+**/pubspec.lock
+**/android/.gradle/
+**/ios/Pods/
+
+# macOS system files
+.DS_Store
+
