@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 void main() => runApp(XylophoneApp());
 
@@ -9,7 +10,10 @@ class XylophoneApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SafeArea(
-          child: Container(),
+          child: Center(child: TextButton(onPressed :(){
+            final player = AudioCache();
+          }, child:Text('Click Me'))
+          ),
         ),
       ),
     );
