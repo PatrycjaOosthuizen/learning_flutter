@@ -9,6 +9,23 @@ class XylophoneApp extends StatelessWidget {
     player.play(AssetSource('note$soundNumber.wav'));
   }
 
+  Expanded buildKey({required Color color, required int sound, required String label}) {
+    return Expanded(
+      child: TextButton(
+        onPressed: () {
+          playSound(sound);
+        },
+        style: TextButton.styleFrom(
+          backgroundColor: color,
+        ),
+        child: Text(
+          label,
+          style: TextStyle(color: Colors.white),
+        ),
+      ),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -18,104 +35,13 @@ class XylophoneApp extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(1);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.red,
-                  ),
-                  child: Text(
-                    'Do',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(2);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.orange,
-                  ),
-                  child: Text(
-                    'Re',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(3);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.yellow,
-                  ),
-                  child: Text(
-                    'Mi',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(4);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.green,
-                  ),
-                  child: Text(
-                    'Fa',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(5);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.teal,
-                  ),
-                  child: Text(
-                    'So',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(6);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                  ),
-                  child: Text(
-                    'La',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
-              Expanded(
-                child: TextButton(
-                  onPressed: () {
-                    playSound(7);
-                  },
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.purple,
-                  ),
-                  child: Text(
-                    'Ti',
-                    style: TextStyle(color: Colors.white),
-                  ),
-                ),
-              ),
+              buildKey(color: Colors.red, sound: 1, label: 'Do'),
+              buildKey(color: Colors.orange, sound: 2, label: 'Re'),
+              buildKey(color: Colors.yellow, sound: 3, label: 'Mi'),
+              buildKey(color: Colors.green, sound: 4, label: 'Fa'),
+              buildKey(color: Colors.teal, sound: 5, label: 'So'),
+              buildKey(color: Colors.blue, sound: 6, label: 'La'),
+              buildKey(color: Colors.purple, sound: 7, label: 'Ti'),
             ],
           ),
         ),
