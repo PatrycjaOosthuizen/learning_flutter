@@ -20,7 +20,7 @@ class XylophoneApp extends StatelessWidget {
         ),
         child: Text(
           label,
-          style: TextStyle(color: Colors.white),
+          style: TextStyle(color: Colors.white, fontSize: 30),
         ),
       ),
     );
