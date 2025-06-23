@@ -60,6 +60,11 @@ class _QuizPageState extends State<QuizPage> {
               child: Text('True', style: TextStyle(fontSize: 20.0)),
               onPressed: () {
                 // The user picked true.
+                setState(() {
+                  scoreKeeper.add(
+                      Icon(Icons.check, color: Colors.green,)
+                  );
+                });
               },
             ),
           ),
