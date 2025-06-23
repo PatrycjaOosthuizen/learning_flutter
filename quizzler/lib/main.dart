@@ -40,10 +40,7 @@ class _QuizPageState extends State<QuizPage> {
               child: Text(
                 'This is where the question text will go.',
                 textAlign: TextAlign.center,
-                style: TextStyle(
-                  fontSize: 25.0,
-                  color: Colors.white,
-                ),
+                style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
             ),
           ),
@@ -56,12 +53,7 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.green,
                 foregroundColor: Colors.white,
               ),
-              child: Text(
-                'True',
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
+              child: Text('True', style: TextStyle(fontSize: 20.0)),
               onPressed: () {
                 // The user picked true.
               },
@@ -76,19 +68,19 @@ class _QuizPageState extends State<QuizPage> {
                 backgroundColor: Colors.red,
                 foregroundColor: Colors.white,
               ),
-              child: Text(
-                'False',
-                style: TextStyle(
-                  fontSize: 20.0,
-                ),
-              ),
+              child: Text('False', style: TextStyle(fontSize: 20.0)),
               onPressed: () {
                 // The user picked false.
               },
             ),
           ),
         ),
-        // TODO: Add a Row here as your score keeper
+        Row(
+          children: [
+            Icon(Icons.check, color: Colors.green),
+            Icon(Icons.close, color: Colors.red),
+          ],
+        ),
       ],
     );
   }
