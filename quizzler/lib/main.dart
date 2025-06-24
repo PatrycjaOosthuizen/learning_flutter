@@ -33,6 +33,9 @@ class _QuizPageState extends State<QuizPage> {
     'Approximately one quarter of human bones are in the feet.',
     'A slug\'s blood is green.',
   ];
+
+  int questionNumber = 0;
+
   @override
   Widget build(BuildContext context) {
     return Column(
@@ -45,7 +48,7 @@ class _QuizPageState extends State<QuizPage> {
             padding: EdgeInsets.all(10.0),
             child: Center(
               child: Text(
-                'This is where the question text will go.',
+                questions[questionNumber],
                 textAlign: TextAlign.center,
                 style: TextStyle(fontSize: 25.0, color: Colors.white),
               ),
@@ -63,6 +66,9 @@ class _QuizPageState extends State<QuizPage> {
               child: Text('True', style: TextStyle(fontSize: 20.0)),
               onPressed: () {
                 // The user picked true.
+                setState(() {
+                  questionNumber++;
+                });
 
               },
             ),
@@ -79,6 +85,9 @@ class _QuizPageState extends State<QuizPage> {
               child: Text('False', style: TextStyle(fontSize: 20.0)),
               onPressed: () {
                 // The user picked false.
+                setState(() {
+                  questionNumber++;
+                });
               },
             ),
           ),
