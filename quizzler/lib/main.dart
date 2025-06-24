@@ -26,9 +26,12 @@ class QuizPage extends StatefulWidget {
 }
 class _QuizPageState extends State<QuizPage> {
 
-  List<Icon>scoreKeeper = [
-    Icon(Icons.check, color: Colors.green),
-    Icon(Icons.close, color: Colors.red),
+  List<Icon>scoreKeeper = [];
+
+  List<String>questions = [
+    'You can lead a cow down stairs but not up stairs.',
+    'Approximately one quarter of human bones are in the feet.',
+    'A slug\'s blood is green.',
   ];
   @override
   Widget build(BuildContext context) {
@@ -60,11 +63,7 @@ class _QuizPageState extends State<QuizPage> {
               child: Text('True', style: TextStyle(fontSize: 20.0)),
               onPressed: () {
                 // The user picked true.
-                setState(() {
-                  scoreKeeper.add(
-                      Icon(Icons.check, color: Colors.green,)
-                  );
-                });
+
               },
             ),
           ),
