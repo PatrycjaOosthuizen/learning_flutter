@@ -32,6 +32,7 @@ class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   int questionNumber = 0;
   bool quizFinished = false;
+  int correctAnswers = 0; // Track number of correct answers
 
   void checkAnswer(bool userPickedAnswer) {
     if (quizFinished) return;
@@ -40,13 +41,10 @@ class _QuizPageState extends State<QuizPage> {
 
     setState(() {
       if (userPickedAnswer == correctAnswer) {
-        scoreKeeper.add(
-          Icon(Icons.check, color: Colors.green),
-        );
+        scoreKeeper.add(Icon(Icons.check, color: Colors.green));
+        correctAnswers++; // Increment on correct answer
       } else {
-        scoreKeeper.add(
-          Icon(Icons.close, color: Colors.red),
-        );
+        scoreKeeper.add(Icon(Icons.close, color: Colors.red));
       }
 
       if (questionNumber < quizBrain.totalQuestions - 1) {
@@ -60,6 +58,7 @@ class _QuizPageState extends State<QuizPage> {
   void restartQuiz() {
     setState(() {
       questionNumber = 0;
+      correctAnswers = 0; // Reset correct answers
       scoreKeeper = [];
       quizFinished = false;
     });
@@ -75,6 +74,11 @@ class _QuizPageState extends State<QuizPage> {
           Text(
             'Quiz Finished!',
             style: TextStyle(fontSize: 28.0, color: Colors.white),
+          ),
+          SizedBox(height: 10.0),
+          Text(
+            'Your score was $correctAnswers / ${quizBrain.totalQuestions}', // 🆕 Show score
+            style: TextStyle(fontSize: 20.0, color: Colors.white70),
           ),
           SizedBox(height: 20.0),
           ElevatedButton(
