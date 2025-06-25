@@ -29,20 +29,24 @@ class QuizPage extends StatefulWidget {
 }
 
 class _QuizPageState extends State<QuizPage> {
-  List<Icon> scoreKeeper = [];
-  int questionNumber = 0;
-  bool quizFinished = false;
+  List<Icon> scoreKeeper = []; // Icons for tracking score visually
+  int questionNumber = 0; // Current question index
+
+  bool quizFinished = false; // Whether quiz is completed
   int correctAnswers = 0; // Track number of correct answers
 
+  // Function to check the user's answer and update score/state
   void checkAnswer(bool userPickedAnswer) {
     if (quizFinished) return;
 
+    // Get the correct answer from quiz logic
     bool correctAnswer = quizBrain.getQuestionAnswer(questionNumber);
 
     setState(() {
+      // Compare user's answer with correct answer
       if (userPickedAnswer == correctAnswer) {
         scoreKeeper.add(Icon(Icons.check, color: Colors.green));
-        correctAnswers++; // Increment on correct answer
+        correctAnswers++; // Increment score if correct
       } else {
         scoreKeeper.add(Icon(Icons.close, color: Colors.red));
       }
@@ -55,11 +59,12 @@ class _QuizPageState extends State<QuizPage> {
     });
   }
 
+  // Reset quiz state to replay
   void restartQuiz() {
     setState(() {
       questionNumber = 0;
       correctAnswers = 0; // Reset correct answers
-      scoreKeeper = [];
+      scoreKeeper = []; // Clear score icons
       quizFinished = false;
     });
   }
@@ -67,6 +72,7 @@ class _QuizPageState extends State<QuizPage> {
   @override
   Widget build(BuildContext context) {
     return quizFinished
+    // Show this UI when quiz is finished
         ? Center(
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
@@ -77,21 +83,23 @@ class _QuizPageState extends State<QuizPage> {
           ),
           SizedBox(height: 10.0),
           Text(
-            'Your score was $correctAnswers / ${quizBrain.totalQuestions}', // 🆕 Show score
+            'Your score was $correctAnswers / ${quizBrain.totalQuestions}', // Show score
             style: TextStyle(fontSize: 20.0, color: Colors.white70),
           ),
           SizedBox(height: 20.0),
           ElevatedButton(
             onPressed: restartQuiz,
-            child: Text('Restart Quiz'),
+            child: Text('Restart Quiz'), // Button to restart quiz
           ),
         ],
       ),
     )
+        // Show quiz questions and answers when quiz is active
         : Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
+        // Question text area
         Expanded(
           flex: 5,
           child: Padding(
@@ -105,6 +113,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
+        // True button
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(15.0),
@@ -118,6 +127,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
+        // False button
         Expanded(
           child: Padding(
             padding: EdgeInsets.all(15.0),
@@ -131,6 +141,7 @@ class _QuizPageState extends State<QuizPage> {
             ),
           ),
         ),
+        // Row showing score icons
         Row(
           children: scoreKeeper,
         ),
