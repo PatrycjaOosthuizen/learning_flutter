@@ -31,8 +31,11 @@ class QuizPage extends StatefulWidget {
 class _QuizPageState extends State<QuizPage> {
   List<Icon> scoreKeeper = [];
   int questionNumber = 0;
+  bool quizFinished = false;
 
   void checkAnswer(bool userPickedAnswer) {
+    if (quizFinished) return;
+
     bool correctAnswer = quizBrain.getQuestionAnswer(questionNumber);
 
     setState(() {
@@ -49,15 +52,39 @@ class _QuizPageState extends State<QuizPage> {
       if (questionNumber < quizBrain.totalQuestions - 1) {
         questionNumber++;
       } else {
-        // Optionally show a message or reset the quiz
-        print('Quiz completed.');
+        quizFinished = true;
       }
+    });
+  }
+
+  void restartQuiz() {
+    setState(() {
+      questionNumber = 0;
+      scoreKeeper = [];
+      quizFinished = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
-    return Column(
+    return quizFinished
+        ? Center(
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Text(
+            'Quiz Finished!',
+            style: TextStyle(fontSize: 28.0, color: Colors.white),
+          ),
+          SizedBox(height: 20.0),
+          ElevatedButton(
+            onPressed: restartQuiz,
+            child: Text('Restart Quiz'),
+          ),
+        ],
+      ),
+    )
+        : Column(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: <Widget>[
