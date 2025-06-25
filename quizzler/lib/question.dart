@@ -1,11 +1,7 @@
 class Question {
+  final String questionText;
+  final bool questionAnswer;
 
-  String questionText;
-  bool questionAnswer;
-
-  Question({required String q, required bool a}){
-
-    questionText = q;
-    questionAnswer = a;
-  }
+  Question({required this.questionText, required this.questionAnswer});
 }
+
