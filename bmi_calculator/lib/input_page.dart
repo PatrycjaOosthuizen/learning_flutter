@@ -16,13 +16,7 @@ class _InputPageState extends State<InputPage> {
         children: <Widget>[
           Expanded(child: Row(
             children: <Widget> [
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1D1E33),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),),
+              Expanded(child: ReusableCard(),),
               Expanded(child: Container(
                 margin: EdgeInsets.all(15.0),
                 decoration: BoxDecoration(
@@ -32,32 +26,31 @@ class _InputPageState extends State<InputPage> {
               ),),
             ],
           ),),
-          Expanded(child: Container(
-            margin: EdgeInsets.all(15.0),
-            decoration: BoxDecoration(
-              color: Color(0xFF1D1E33),
-              borderRadius: BorderRadius.circular(8.0),
-            ),
-          ),),
+          Expanded(child: ReusableCard()),
           Expanded(child: Row(
             children: <Widget> [
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1D1E33),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),),
-              Expanded(child: Container(
-                margin: EdgeInsets.all(15.0),
-                decoration: BoxDecoration(
-                  color: Color(0xFF1D1E33),
-                  borderRadius: BorderRadius.circular(8.0),
-                ),
-              ),),
+              Expanded(child: ReusableCard()),
+              Expanded(child: ReusableCard()),
             ],
           ),),
         ],
+      ),
+    );
+  }
+}
+
+class ReusableCard extends StatelessWidget {
+  const ReusableCard({
+    super.key,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.all(15.0),
+      decoration: BoxDecoration(
+        color: Color(0xFF1D1E33),
+        borderRadius: BorderRadius.circular(8.0),
       ),
     );
   }
