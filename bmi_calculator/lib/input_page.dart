@@ -14,7 +14,9 @@ class _InputPageState extends State<InputPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('BMI CALCULATOR'),
+        title: Text('BMI CALCULATOR',
+          style: TextStyle(color: Colors.white),
+        ),
       ),
       body: Column(
         children: <Widget>[
@@ -54,13 +56,15 @@ class _InputPageState extends State<InputPage> {
 }
 
 class ReusableCard extends StatelessWidget {
-  const ReusableCard({ required this.colour, super.key});
+  const ReusableCard({ required this.colour, this.cardChild, super.key});
 
   final Color colour;
+  final Widget? cardChild;
 
   @override
   Widget build(BuildContext context) {
     return Container(
+      child: cardChild,
       margin: EdgeInsets.all(15.0),
       decoration: BoxDecoration(
         color: colour,
