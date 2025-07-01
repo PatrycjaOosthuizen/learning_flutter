@@ -18,8 +18,8 @@ class InputPage extends StatefulWidget {
 }
 
 class _InputPageState extends State<InputPage> {
-
   Gender ? selectedGender;
+  int height = 180;
 
   @override
   Widget build(BuildContext context) {
@@ -28,6 +28,7 @@ class _InputPageState extends State<InputPage> {
         title: Text('BMI CALCULATOR', style: TextStyle(color: Colors.white)),
       ),
       body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
         children: <Widget>[
           Expanded(
             child: Row(
@@ -66,8 +67,38 @@ class _InputPageState extends State<InputPage> {
           Expanded(child: ReusableCard(
               colour: kActiveCardColor,
               cardChild: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
                 children: <Widget>[
-                  Text('HEIGHT')
+                  Text('HEIGHT',
+                    style: kLabelTextStyle,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.baseline,
+                    textBaseline: TextBaseline.alphabetic,
+                    children: <Widget>[
+                      Text(
+                        height.toString(),
+                        style: kNumberTextStyle,
+                      ),
+                      Text(
+                        'cm',
+                        style: kLabelTextStyle,
+                      )
+                    ],
+                    ),
+                    Slider(
+                      value: height.toDouble(),
+                      min: 115.0,
+                      max: 215.0,
+                      activeColor: kActiveSliderColor,
+                      inactiveColor: kInactiveSliderColor,
+                      onChanged: (double newValue) {
+                        setState(() {
+                          height = newValue.round();
+                        });
+                      },
+                    ),
                 ],
               ) ,
           ),
