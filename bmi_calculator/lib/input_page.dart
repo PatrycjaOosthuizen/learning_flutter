@@ -39,7 +39,7 @@ class _InputPageState extends State<InputPage> {
                         selectedGender = Gender.male;
                       });
                     },
-                    colour: selectedGender == Gender.male ? activeCardColor : inactiveCardColor,
+                    colour: selectedGender == Gender.male ? kActiveCardColor : kInactiveCardColor,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.mars,
                       label: 'MALE',
@@ -53,7 +53,7 @@ class _InputPageState extends State<InputPage> {
                         selectedGender = Gender.female;
                       });
                     },
-                    colour: selectedGender == Gender.female ? activeCardColor : inactiveCardColor,
+                    colour: selectedGender == Gender.female ? kActiveCardColor : kInactiveCardColor,
                     cardChild: IconContent(
                       icon: FontAwesomeIcons.venus,
                       label: 'FEMALE',
@@ -64,7 +64,7 @@ class _InputPageState extends State<InputPage> {
             ),
           ),
           Expanded(child: ReusableCard(
-              colour: activeCardColor,
+              colour: kActiveCardColor,
               cardChild: Column(
                 children: <Widget>[
                   Text('HEIGHT')
@@ -75,16 +75,16 @@ class _InputPageState extends State<InputPage> {
           Expanded(
             child: Row(
               children: <Widget>[
-                Expanded(child: ReusableCard(colour: activeCardColor)),
-                Expanded(child: ReusableCard(colour: activeCardColor)),
+                Expanded(child: ReusableCard(colour: kActiveCardColor)),
+                Expanded(child: ReusableCard(colour: kActiveCardColor)),
               ],
             ),
           ),
           Container(
-            color: bottomContainerColor,
+            color: kBottomContainerColor,
             margin: EdgeInsets.only(top: 10.0),
             width: double.infinity,
-            height: bottomContainerHeight,
+            height: kBottomContainerHeight,
           ),
         ],
       ),

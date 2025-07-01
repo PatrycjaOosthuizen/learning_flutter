@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 
 const labelTextStyle = TextStyle(fontSize: 18.0, color: Color(0xFF8D8E98));
 
-const bottomContainerHeight = 80.0;
-const activeCardColor = Color(0xFF1D1E33);
-const inactiveCardColor = Color(0xFF111328);
-const bottomContainerColor = Color(0XFFEB1555);
+const kBottomContainerHeight = 80.0;
+const kActiveCardColor = Color(0xFF1D1E33);
+const kInactiveCardColor = Color(0xFF111328);
+const kBottomContainerColor = Color(0XFFEB1555);
