@@ -14,3 +14,4 @@ const kThumbSliderColor = Color(0xFFEB1555);
 const kActiveSliderColor = Color(0xFFFFFFFF);
 const kInactiveSliderColor = Color(0xFF8D8E98);
 const kOverLayColor = Color(0x29EB1555);
+const kButtonColor = Color(0xFF4C4F5E);
