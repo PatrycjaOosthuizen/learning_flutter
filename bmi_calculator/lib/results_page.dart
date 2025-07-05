@@ -1,5 +1,7 @@
+import 'package:bmi_calculator/reusable_card.dart';
 import 'package:flutter/material.dart';
 import 'constants.dart';
+import 'reusable_card.dart';
 
 class ResultsPage extends StatelessWidget {
   const ResultsPage({super.key});
@@ -12,7 +14,31 @@ class ResultsPage extends StatelessWidget {
           style: TextStyle(color: kAppBarTextColor),
         ),
       ),
-      body: Text('Hello'),
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: <Widget> [
+          Expanded(child: Container(
+            child: Text('You Result', style: kTitleTextStyle),
+          ),
+          ),
+          Expanded(
+            flex: 5,
+            child: ReusableCard(
+              colour: kActiveCardColor,
+              cardChild:Column(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget> [
+                  Text('Normal', style: kResultTextStyle),
+                  Text('18.3', style: kBMITextStyle),
+                  Text('You have normal weight, well done!',textAlign: TextAlign.center, style: kBodyTextStyle),
+                ],
+              ) ,
+            ),
+          ),
+        ],
+      ),
     );
   }
 }
