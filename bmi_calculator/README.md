@@ -29,6 +29,7 @@ A beautiful and responsive BMI (Body Mass Index) Calculator app built with **Flu
 ## Screenshots
 
 ![Screenshot](images/screenshot.png)
+![Screenshot](images/screenshot_result.png)
 
 ---
 
