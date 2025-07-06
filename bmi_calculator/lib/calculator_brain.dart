@@ -17,7 +17,7 @@ class CalculatorBrain {
     if (_bmi >=25) {
       return 'Overweight';
     } else if (_bmi > 18.5) {
-      return 'Narmal';
+      return 'Normal';
     } else {
       return 'Underweight';
     }
