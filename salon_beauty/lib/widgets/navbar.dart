@@ -21,7 +21,7 @@ class Navbar extends StatelessWidget {
               const SizedBox(height: 10),
               Wrap(
                 spacing: 12,
-                children: _navItems(),
+                children: _navItems(context),
               ),
             ],
           )
@@ -30,7 +30,7 @@ class Navbar extends StatelessWidget {
             children: [
               _brand(),
               Row(
-                children: _navItems(),
+                children: _navItems(context),
               ),
             ],
           ),
@@ -50,21 +50,27 @@ class Navbar extends StatelessWidget {
     );
   }
 
-  List<Widget> _navItems() {
-    final items = ['Strona Główna', 'Usługi', 'Galeria', 'O nas', 'Kontakt'];
-    return items
-        .map(
-          (title) => Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8),
-        child: Text(
-          title,
-          style: const TextStyle(
-            fontSize: 16,
-            color: AppColors.textColor,
+  List<Widget> _navItems(BuildContext context) {
+    final items = {
+      'Strona Główna': '/',
+      'Usługi': '/services',
+      'Galeria': '/gallery',
+      'O nas': '/about',
+      'Kontakt': '/contact',
+    };
+
+    return items.entries.map((entry) {
+      return GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(entry.value);
+        },
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 8),
+          child: Text(
+            entry.key,
+            style: const TextStyle(fontSize: 16, color: AppColors.textColor),
           ),
         ),
-      ),
-    )
-        .toList();
-  }
-}
+      );
+    }).toList();
+  }}

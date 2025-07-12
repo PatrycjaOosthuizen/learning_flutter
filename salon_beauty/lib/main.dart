@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'pages/home_page.dart';
-import 'theme/app_colors.dart';
+import 'pages/services_page.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
@@ -12,16 +12,16 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Salon Paznokci',
+      title: 'Salon Beauty',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        scaffoldBackgroundColor: AppColors.background,
-        fontFamily: 'Roboto',
-        textTheme: const TextTheme(
-          bodyMedium: TextStyle(color: AppColors.textColor),
-        ),
+        useMaterial3: true,
       ),
-      home: HomePage(),
+      initialRoute: '/',
+      routes: {
+        '/': (context) => const HomePage(),
+        '/services': (context) => const ServicesPage(),
+      },
     );
   }
 }
