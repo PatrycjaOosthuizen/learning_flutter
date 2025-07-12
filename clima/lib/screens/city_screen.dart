@@ -9,6 +9,8 @@ class CityScreen extends StatefulWidget {
 }
 
 class _CityScreenState extends State<CityScreen> {
+  String? cityName;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -25,26 +27,33 @@ class _CityScreenState extends State<CityScreen> {
             children: <Widget>[
               Align(
                 alignment: Alignment.topLeft,
-                child: TextButton(
+                child: IconButton(
+                  icon: const Icon(
+                    Icons.arrow_back_ios,
+                    size: 50.0,
+                  ),
                   onPressed: () {
                     Navigator.pop(context);
                   },
-                  child: const Icon(
-                    Icons.arrow_back_ios,
-                    size: 50.0,
-                    color: Colors.white, // Set color to match the background
-                  ),
                 ),
               ),
               Container(
                 padding: const EdgeInsets.all(20.0),
-                child: null, // Placeholder; replace with your TextField or widget
+                child: TextField(
+                  style: const TextStyle(
+                    color: Colors.black,
+                  ),
+                  decoration: kTextFieldInputDecoration,
+                  onChanged: (value) {
+                    cityName = value;
+                  },
+                ),
               ),
-              TextButton(
+              ElevatedButton(
                 onPressed: () {
-                  // Add weather fetching logic here
+                  Navigator.pop(context, cityName);
                 },
-                child: Text(
+                child: const Text(
                   'Get Weather',
                   style: kButtonTextStyle,
                 ),
