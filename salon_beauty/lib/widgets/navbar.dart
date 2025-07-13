@@ -1,8 +1,15 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 
-class Navbar extends StatelessWidget {
+class Navbar extends StatefulWidget {
   const Navbar({super.key});
+
+  @override
+  State<Navbar> createState() => _NavbarState();
+}
+
+class _NavbarState extends State<Navbar> {
+  bool _menuOpen = false;
 
   @override
   Widget build(BuildContext context) {
@@ -11,27 +18,39 @@ class Navbar extends StatelessWidget {
         final isMobile = constraints.maxWidth < 600;
 
         return Container(
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
           color: AppColors.beige,
-          child: isMobile
-              ? Column(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              _brand(),
-              const SizedBox(height: 10),
-              Wrap(
-                spacing: 12,
-                children: _navItems(context),
-              ),
-            ],
-          )
-              : Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              _brand(),
+              // Top bar (brand + hamburger or links)
               Row(
-                children: _navItems(context),
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  _brand(),
+                  if (!isMobile)
+                    Row(children: _navItems(context))
+                  else
+                    IconButton(
+                      icon: Icon(
+                        _menuOpen ? Icons.close : Icons.menu,
+                        color: AppColors.brown,
+                      ),
+                      onPressed: () {
+                        setState(() {
+                          _menuOpen = !_menuOpen;
+                        });
+                      },
+                    ),
+                ],
               ),
+
+              // Mobile nav items
+              if (isMobile && _menuOpen)
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: _navItems(context),
+                ),
             ],
           ),
         );
@@ -42,7 +61,7 @@ class Navbar extends StatelessWidget {
   Widget _brand() {
     return Text(
       'Salon Paznokci',
-      style: TextStyle(
+      style: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
         color: AppColors.brown,
@@ -63,14 +82,21 @@ class Navbar extends StatelessWidget {
       return GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(entry.value);
+          setState(() {
+            _menuOpen = false; // close menu after navigation
+          });
         },
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 8),
+          padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 4),
           child: Text(
             entry.key,
-            style: const TextStyle(fontSize: 16, color: AppColors.textColor),
+            style: const TextStyle(
+              fontSize: 16,
+              color: AppColors.textColor,
+            ),
           ),
         ),
       );
     }).toList();
-  }}
+  }
+}
