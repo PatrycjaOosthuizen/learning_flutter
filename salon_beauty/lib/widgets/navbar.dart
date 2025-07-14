@@ -13,49 +13,52 @@ class _NavbarState extends State<Navbar> {
 
   @override
   Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final isMobile = constraints.maxWidth < 600;
+    return SafeArea(
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isMobile = constraints.maxWidth < 600;
 
-        return Container(
-          color: AppColors.beige,
-          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              // Top bar (brand + hamburger or links)
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  _brand(),
-                  if (!isMobile)
-                    Row(children: _navItems(context))
-                  else
-                    IconButton(
-                      icon: Icon(
-                        _menuOpen ? Icons.close : Icons.menu,
-                        color: AppColors.brown,
+          return Container(
+            color: AppColors.beige,
+            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Top bar (brand + hamburger or nav items)
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    _brand(),
+                    if (!isMobile)
+                      Row(children: _navItems(context))
+                    else
+                      IconButton(
+                        icon: Icon(
+                          _menuOpen ? Icons.close : Icons.menu,
+                          color: AppColors.brown,
+                        ),
+                        onPressed: () {
+                          setState(() {
+                            _menuOpen = !_menuOpen;
+                          });
+                        },
                       ),
-                      onPressed: () {
-                        setState(() {
-                          _menuOpen = !_menuOpen;
-                        });
-                      },
-                    ),
-                ],
-              ),
-
-              // Mobile nav items
-              if (isMobile && _menuOpen)
-                Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: _navItems(context),
+                  ],
                 ),
-            ],
-          ),
-        );
-      },
+
+                // Mobile nav items
+                if (isMobile && _menuOpen)
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: _navItems(context),
+                  ),
+              ],
+            ),
+          );
+        },
+      ),
     );
+
   }
 
   Widget _brand() {

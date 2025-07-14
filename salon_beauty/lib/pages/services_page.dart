@@ -1,5 +1,3 @@
-// lib/pages/services.dart
-
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
@@ -35,54 +33,60 @@ class ServicesPage extends StatelessWidget {
 
     return Scaffold(
       backgroundColor: AppColors.background,
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            const Navbar(),
-            const SizedBox(height: 20),
-            Text(
-              'Nasze Usługi',
-              style: TextStyle(
-                fontSize: 32,
-                fontWeight: FontWeight.bold,
-                color: AppColors.brown,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          padding: const EdgeInsets.only(bottom: 24.0),
+          child: Column(
+            children: [
+              const Navbar(),
+              const SizedBox(height: 20),
+              Text(
+                'Nasze Usługi',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.brown,
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              'Poznaj nasze profesjonalne zabiegi pielęgnacyjne',
-              style: TextStyle(
-                fontSize: 16,
-                color: AppColors.textColor,
+              const SizedBox(height: 10),
+              Text(
+                'Poznaj nasze profesjonalne zabiegi pielęgnacyjne',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.textColor,
+                ),
               ),
-            ),
-            const SizedBox(height: 30),
-            LayoutBuilder(
-              builder: (context, constraints) {
-                int crossAxisCount = constraints.maxWidth > 800 ? 2 : 1;
-
-                return Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 20),
-                  child: GridView.count(
-                    crossAxisCount: crossAxisCount,
-                    shrinkWrap: true,
-                    physics: const NeverScrollableScrollPhysics(),
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 20,
-                    childAspectRatio: 3 / 2,
-                    children: services.map((service) {
-                      return ServiceCard(
-                        title: service['title'] as String,
-                        description: service['description'] as String,
-                        icon: service['icon'] as IconData,
-                      );
-                    }).toList(),
-                  ),
-                );
-              },
-            ),
-            const SizedBox(height: 40),
-          ],
+              const SizedBox(height: 30),
+              LayoutBuilder(
+                builder: (context, constraints) {
+                  final isWide = constraints.maxWidth > 800;
+                  return Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: GridView.builder(
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      itemCount: services.length,
+                      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: isWide ? 2 : 1,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 20,
+                        childAspectRatio: 3 / 2,
+                      ),
+                      itemBuilder: (context, index) {
+                        final service = services[index];
+                        return ServiceCard(
+                          title: service['title'] as String,
+                          description: service['description'] as String,
+                          icon: service['icon'] as IconData,
+                        );
+                      },
+                    ),
+                  );
+                },
+              ),
+              const SizedBox(height: 40),
+            ],
+          ),
         ),
       ),
     );

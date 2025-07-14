@@ -8,11 +8,20 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        children: const [
-          Navbar(),
-          HeroSection(),
-        ],
+      backgroundColor: Colors.white, // Or AppColors.background if preferred
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.only(bottom: 24.0),
+            child: Column(
+              children: const [
+                Navbar(),
+                HeroSection(),
+                // Add more sections later (e.g., ServicesPreview, Testimonials, Footer)
+              ],
+            ),
+          ),
+        ),
       ),
     );
   }
