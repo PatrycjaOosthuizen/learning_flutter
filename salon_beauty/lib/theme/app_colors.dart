@@ -7,5 +7,5 @@ class AppColors {
   static const Color lightBrown = Color(0xFFD2B48C); // Light brown for highlights
   static const Color background = Color(0xFFFFFDF9); // Soft background 0xFFFAF9F6
   static const Color textColor = Color(0xFF3E3E3E); //0xFF4A4A4A Main paragraph text
-
+  static const Color lightGrey = Color(0xFFFAFAFA); // homePage background
 }

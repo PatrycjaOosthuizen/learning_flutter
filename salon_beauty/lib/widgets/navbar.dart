@@ -58,7 +58,6 @@ class _NavbarState extends State<Navbar> {
         },
       ),
     );
-
   }
 
   Widget _brand() {
