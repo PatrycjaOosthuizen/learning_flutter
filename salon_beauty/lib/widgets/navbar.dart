@@ -63,7 +63,7 @@ class _NavbarState extends State<Navbar> {
 
   Widget _brand() {
     return Text(
-      'Salon Paznokci',
+      'Salon Beauty',
       style: const TextStyle(
         fontSize: 24,
         fontWeight: FontWeight.bold,
@@ -77,7 +77,7 @@ class _NavbarState extends State<Navbar> {
       'Strona Główna': '/',
       'Usługi': '/services',
       'Galeria': '/gallery',
-      'O nas': '/about',
+      'O mnie': '/about',
       'Kontakt': '/contact',
     };
 
