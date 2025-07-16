@@ -138,13 +138,7 @@ class AboutPage extends StatelessWidget {
                       ),
                       const SizedBox(height: 32),
                       // Quick stats
-                      Row(
-                        children: [
-                          _buildStatItem('8+', 'Lat doświadczenia'),
-                          const SizedBox(width: 40),
-                          _buildStatItem('1000+', 'Zadowolonych klientek'),
-                        ],
-                      ),
+
                     ],
                   ),
                 ),
@@ -210,7 +204,8 @@ class AboutPage extends StatelessWidget {
                 ),
                 const SizedBox(height: 24),
                 Text(
-                  'Salon Paznokci to moje miejsce pasji i piękna. Nazywam się Agnieszka i od lat pomagam klientkom czuć się wyjątkowo dzięki profesjonalnej pielęgnacji paznokci. W naszym salonie łączymy styl, jakość i wyjątkową atmosferę.',
+                  'Salon Paznokci to moje miejsce pasji i piękna. Nazywam się Agnieszka i od lat pomagam klientkom czuć się wyjątkowo dzięki profesjonalnej pielęgnacji paznokci. '
+                      'W Salon Beauty łączę styl, jakość i wyjątkową atmosferę. Oferuję szeroki zakres usług stylizacji paznokci, dbając o komfort i satysfakcję każdej klientki.',
                   style: TextStyle(
                     fontSize: 16,
                     color: AppColors.textColor,
@@ -479,28 +474,6 @@ class AboutPage extends StatelessWidget {
     );
   }
 
-  Widget _buildStatItem(String number, String label) {
-    return Column(
-      children: [
-        Text(
-          number,
-          style: TextStyle(
-            fontSize: 28,
-            fontWeight: FontWeight.bold,
-            color: AppColors.brown,
-          ),
-        ),
-        Text(
-          label,
-          style: TextStyle(
-            fontSize: 14,
-            color: AppColors.textColor,
-            fontWeight: FontWeight.w500,
-          ),
-        ),
-      ],
-    );
-  }
 
   Widget _buildExperienceCard(String title, String description, IconData icon) {
     return Container(
