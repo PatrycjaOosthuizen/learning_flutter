@@ -60,11 +60,33 @@ class _ContactPageState extends State<ContactPage> {
           children: [
             // Hero Section
             _buildHeroSection(),
+            // Main Content Section with max width constraint
+            _buildMainContentWithConstraints(),
+            const SizedBox(height: 40),
+          ],
+        ),
+      ),
+    );
+  }
+
+  Widget _buildMainContentWithConstraints() {
+    return Center(
+      child: Container(
+        constraints: const BoxConstraints(maxWidth: 1200), // Max width for large screens
+        child: Column(
+          children: [
             // Main Content Section
             _buildContactSection(),
-            // Social Media
-            _buildSocialSection(),
-            const SizedBox(height: 40),
+            // Social Media - only show on mobile/tablet (desktop has it integrated)
+            LayoutBuilder(
+              builder: (context, constraints) {
+                if (constraints.maxWidth <= 1024) {
+                  return _buildSocialSection();
+                } else {
+                  return const SizedBox.shrink();
+                }
+              },
+            ),
           ],
         ),
       ),
@@ -82,28 +104,33 @@ class _ContactPageState extends State<ContactPage> {
           colors: [AppColors.beige, AppColors.background],
         ),
       ),
-      child: Column(
-        children: [
-          const Text(
-            'Odwiedź Nas',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: AppColors.brown,
-            ),
-            textAlign: TextAlign.center,
+      child: Center(
+        child: Container(
+          constraints: const BoxConstraints(maxWidth: 800),
+          child: Column(
+            children: [
+              const Text(
+                'Odwiedź Nas',
+                style: TextStyle(
+                  fontSize: 32,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.brown,
+                ),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 16),
+              Text(
+                'Zapraszamy do naszego salonu piękności w Nałęczowie.',
+                style: TextStyle(
+                  fontSize: 16,
+                  color: AppColors.textColor.withValues(alpha: 0.8),
+                  height: 1.5,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ],
           ),
-          const SizedBox(height: 16),
-          Text(
-            'Zapraszamy do naszego salonu piękności w Nałęczowie.',
-            style: TextStyle(
-              fontSize: 16,
-              color: AppColors.textColor.withValues(alpha: 0.8),
-              height: 1.5,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -111,14 +138,51 @@ class _ContactPageState extends State<ContactPage> {
   Widget _buildContactSection() {
     return Padding(
       padding: const EdgeInsets.all(20),
-      child: Column(
-        children: [
-          // Location section with photo and map - full width
-          _buildSalonPhotoAndMap(),
-          const SizedBox(height: 40),
-          // Contact info and opening hours side by side
-          _buildContactAndHoursSection(),
-        ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          final isDesktop = constraints.maxWidth > 1024;
+
+          if (isDesktop) {
+            // Desktop: 2 columns layout
+            return Row(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                // Left column: Map and Social Media
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      _buildSalonPhotoAndMap(),
+                      const SizedBox(height: 20),
+                      _buildSocialSection(),
+                    ],
+                  ),
+                ),
+                const SizedBox(width: 40),
+                // Right column: Opening Hours, then Contact Info
+                Expanded(
+                  flex: 1,
+                  child: Column(
+                    children: [
+                      _buildOpeningHours(),
+                      const SizedBox(height: 20),
+                      _buildContactInfo(),
+                    ],
+                  ),
+                ),
+              ],
+            );
+          } else {
+            // Mobile/Tablet: Original stacked layout
+            return Column(
+              children: [
+                _buildSalonPhotoAndMap(),
+                const SizedBox(height: 40),
+                _buildContactAndHoursSection(),
+              ],
+            );
+          }
+        },
       ),
     );
   }
@@ -126,24 +190,40 @@ class _ContactPageState extends State<ContactPage> {
   Widget _buildContactAndHoursSection() {
     return LayoutBuilder(
       builder: (context, constraints) {
-        final isMobile = constraints.maxWidth < 800;
+        // More responsive breakpoints
+        final isDesktop = constraints.maxWidth > 1024;
+        final isTablet = constraints.maxWidth > 768 && constraints.maxWidth <= 1024;
 
-        return isMobile
-            ? Column(
-          children: [
-            _buildOpeningHours(),
-            const SizedBox(height: 20),
-            _buildContactInfo(),
-          ],
-        )
-            : Row(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Expanded(child: _buildOpeningHours()),
-            const SizedBox(width: 40),
-            Expanded(child: _buildContactInfo()),
-          ],
-        );
+        if (isDesktop) {
+          // Desktop: side by side with more spacing
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(flex: 1, child: _buildOpeningHours()),
+              const SizedBox(width: 60),
+              Expanded(flex: 1, child: _buildContactInfo()),
+            ],
+          );
+        } else if (isTablet) {
+          // Tablet: side by side with less spacing
+          return Row(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Expanded(child: _buildOpeningHours()),
+              const SizedBox(width: 30),
+              Expanded(child: _buildContactInfo()),
+            ],
+          );
+        } else {
+          // Mobile: stacked
+          return Column(
+            children: [
+              _buildOpeningHours(),
+              const SizedBox(height: 20),
+              _buildContactInfo(),
+            ],
+          );
+        }
       },
     );
   }
@@ -192,16 +272,31 @@ class _ContactPageState extends State<ContactPage> {
           ),
           const SizedBox(height: 30),
 
-          // ✅ Clickable map image from assets
+          // Clickable map image with consistent aspect ratio
           GestureDetector(
             onTap: _openMapsApp,
-            child: ClipRRect(
-              borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
-                'assets/images/map.png',
-                width: double.infinity,
-                height: 200,
-                fit: BoxFit.cover,
+            child: Container(
+              width: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(15),
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.black.withValues(alpha: 0.1),
+                    blurRadius: 10,
+                    offset: const Offset(0, 5),
+                  ),
+                ],
+              ),
+              child: ClipRRect(
+                borderRadius: BorderRadius.circular(15),
+                child: AspectRatio(
+                  aspectRatio: 16 / 9, // Maintain consistent aspect ratio
+                  child: Image.asset(
+                    'assets/images/map.png',
+                    width: double.infinity,
+                    fit: BoxFit.cover, // This will show the full map maintaining aspect ratio
+                  ),
+                ),
               ),
             ),
           ),
@@ -219,40 +314,44 @@ class _ContactPageState extends State<ContactPage> {
 
           const SizedBox(height: 30),
 
-          SizedBox(
-            width: double.infinity,
-            height: 50,
-            child: ElevatedButton(
-              onPressed: _openMapsApp,
-              style: ElevatedButton.styleFrom(
-                backgroundColor: AppColors.brown,
-                foregroundColor: Colors.white,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                elevation: 5,
-              ),
-              child: const Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.directions, size: 20),
-                  SizedBox(width: 8),
-                  Text(
-                    'Otwórz w mapach',
-                    style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w600,
+          // Responsive button
+          LayoutBuilder(
+            builder: (context, constraints) {
+              return SizedBox(
+                width: constraints.maxWidth > 600 ? 300 : double.infinity,
+                height: 50,
+                child: ElevatedButton(
+                  onPressed: _openMapsApp,
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: AppColors.brown,
+                    foregroundColor: Colors.white,
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
                     ),
+                    elevation: 5,
                   ),
-                ],
-              ),
-            ),
+                  child: const Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Icon(Icons.directions, size: 20),
+                      SizedBox(width: 8),
+                      Text(
+                        'Otwórz w mapach',
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              );
+            },
           ),
         ],
       ),
     );
   }
-
 
   Widget _buildContactInfo() {
     return Column(
@@ -446,58 +545,88 @@ class _ContactPageState extends State<ContactPage> {
   }
 
   Widget _buildSocialSection() {
-    return Container(
-      margin: const EdgeInsets.all(20),
-      padding: const EdgeInsets.all(30),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(20),
-        boxShadow: [
-          BoxShadow(
-            color: Colors.black.withValues(alpha: 0.1),
-            blurRadius: 20,
-            offset: const Offset(0, 10),
-          ),
-        ],
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          const Text(
-            'Obserwuj nas',
-            style: TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.bold,
-              color: AppColors.brown,
-            ),
-          ),
-          const SizedBox(height: 16),
-          const Text(
-            'Obserwuj nas na Instagramie, aby być na bieżąco z najnowszymi inspiracjami w stylizacji paznokci i aktualnościami z salonu!',
-            style: TextStyle(
-              fontSize: 14,
-              color: AppColors.textColor,
-              height: 1.5,
-            ),
-          ),
-          const SizedBox(height: 20),
-          GestureDetector(
-            onTap: () => _launchUrl('https://instagram.com/beautystudio'),
-            child: Container(
-              padding: const EdgeInsets.all(12),
-              decoration: BoxDecoration(
-                color: AppColors.brown,
-                borderRadius: BorderRadius.circular(12),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        // Check if we're in desktop mode within the contact section
+        final isInDesktopLayout = constraints.maxWidth > 500; // Adjusted threshold for column context
+
+        return Container(
+          margin: isInDesktopLayout ? EdgeInsets.zero : const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(30),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            borderRadius: BorderRadius.circular(20),
+            boxShadow: [
+              BoxShadow(
+                color: Colors.black.withValues(alpha: 0.1),
+                blurRadius: 20,
+                offset: const Offset(0, 10),
               ),
-              child: const Icon(
-                Icons.camera_alt,
-                color: Colors.white,
-                size: 24,
-              ),
-            ),
+            ],
           ),
-        ],
-      ),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Text(
+                'Obserwuj nas',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: AppColors.brown,
+                ),
+              ),
+              const SizedBox(height: 16),
+              const Text(
+                'Obserwuj nas na Instagramie, aby być na bieżąco z najnowszymi inspiracjami w stylizacji paznokci i aktualnościami z salonu!',
+                style: TextStyle(
+                  fontSize: 14,
+                  color: AppColors.textColor,
+                  height: 1.5,
+                ),
+              ),
+              const SizedBox(height: 20),
+              Center(
+                child: GestureDetector(
+                  onTap: () => _launchUrl('https://instagram.com/beautystudio'),
+                  child: Container(
+                    padding: const EdgeInsets.all(16),
+                    decoration: BoxDecoration(
+                      color: AppColors.brown,
+                      borderRadius: BorderRadius.circular(16),
+                      boxShadow: [
+                        BoxShadow(
+                          color: AppColors.brown.withValues(alpha: 0.3),
+                          blurRadius: 10,
+                          offset: const Offset(0, 5),
+                        ),
+                      ],
+                    ),
+                    child: const Row(
+                      mainAxisSize: MainAxisSize.min,
+                      children: [
+                        Icon(
+                          Icons.camera_alt,
+                          color: Colors.white,
+                          size: 24,
+                        ),
+                        SizedBox(width: 8),
+                        Text(
+                          'Obserwuj na Instagram',
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
+        );
+      },
     );
   }
 }
