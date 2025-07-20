@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_colors.dart';
+import '../widgets/navbar.dart';
+import '../widgets/footer.dart';
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -43,27 +45,21 @@ class _ContactPageState extends State<ContactPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: AppColors.background,
-      appBar: AppBar(
-        backgroundColor: AppColors.beige,
-        title: const Text(
-          'Kontakt',
-          style: TextStyle(
-            color: AppColors.brown,
-            fontWeight: FontWeight.bold,
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const Navbar(),
+              const SizedBox(height: 20),
+              // Hero Section
+              _buildHeroSection(),
+              // Main Content Section with max width constraint
+              _buildMainContentWithConstraints(),
+              const SizedBox(height: 40),
+              // Footer
+              const BeautyStudioFooter(),
+            ],
           ),
-        ),
-        iconTheme: const IconThemeData(color: AppColors.brown),
-        elevation: 0,
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            // Hero Section
-            _buildHeroSection(),
-            // Main Content Section with max width constraint
-            _buildMainContentWithConstraints(),
-            const SizedBox(height: 40),
-          ],
         ),
       ),
     );

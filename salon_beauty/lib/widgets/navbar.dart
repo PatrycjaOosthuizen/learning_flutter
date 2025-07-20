@@ -76,7 +76,7 @@ class _NavbarState extends State<Navbar> {
       'Strona Główna': '/',
       'Usługi': '/services',
       'Galeria': '/gallery',
-      'O mnie': '/about',
+      'O Nas': '/about',
       'Kontakt': '/contact',
     };
 

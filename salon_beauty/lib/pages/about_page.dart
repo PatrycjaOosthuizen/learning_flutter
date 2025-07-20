@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
+import '../widgets/footer.dart';
 
 class AboutPage extends StatelessWidget {
   const AboutPage({super.key});
@@ -38,6 +39,9 @@ class AboutPage extends StatelessWidget {
               // Why Choose Us Section
               _buildWhyChooseUsSection(),
               const SizedBox(height: 60),
+
+              // Footer
+              const BeautyStudioFooter(),
             ],
           ),
         ),

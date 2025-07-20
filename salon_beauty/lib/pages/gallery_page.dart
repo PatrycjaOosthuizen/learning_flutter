@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
+import '../widgets/footer.dart';
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
@@ -64,6 +65,8 @@ class _GalleryPageState extends State<GalleryPage> with TickerProviderStateMixin
               const SizedBox(height: 40),
               _buildGalleryGrid(),
               const SizedBox(height: 40),
+              // Footer
+              const BeautyStudioFooter(),
             ],
           ),
         ),
@@ -130,9 +133,9 @@ class _GalleryPageState extends State<GalleryPage> with TickerProviderStateMixin
                         for (int j = 0; j < crossAxisCount && i + j < galleryImages.length; j++)
                           Expanded(
                             child: Padding(
-                              padding: EdgeInsets.only(
-                                left: j > 0 ? 20 : 0,
-                                right: j < crossAxisCount - 1 ? 20 : 0,
+                              padding: const EdgeInsets.only(
+                                left: 16,   // Increased symmetric padding
+                                right: 16,  // Increased symmetric padding
                                 bottom: 16,
                               ),
                               child: _buildGalleryCard(galleryImages[i + j], i + j),

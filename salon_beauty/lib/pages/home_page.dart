@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
 import '../widgets/hero_section.dart';
+import '../widgets/footer.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -29,7 +30,8 @@ class HomePage extends StatelessWidget {
               const TestimonialsSection(),
               SizedBox(height: isMobile ? 40 : 80),
               const CallToActionSection(),
-              SizedBox(height: isMobile ? 20 : 40),
+              // Footer
+              const BeautyStudioFooter(),
             ],
           ),
         ),
