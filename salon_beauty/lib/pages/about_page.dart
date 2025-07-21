@@ -17,17 +17,6 @@ class AboutPage extends StatelessWidget {
               const Navbar(),
               const SizedBox(height: 32),
 
-              // Page Title
-              const Text(
-                'Salon Beauty',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.brown,
-                ),
-              ),
-              const SizedBox(height: 40),
-
               // Hero Section with Founder
               _buildHeroSection(),
               const SizedBox(height: 60),

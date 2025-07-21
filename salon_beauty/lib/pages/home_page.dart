@@ -3,6 +3,8 @@ import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
 import '../widgets/hero_section.dart';
 import '../widgets/footer.dart';
+import '../widgets/section_header.dart';
+
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
@@ -50,24 +52,12 @@ class WhyChooseUsSection extends StatelessWidget {
       color: Colors.white,
       child: Column(
         children: [
-          Text(
-            'Dlaczego Warto Nas Wybrać?',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFF8B7355),
-            ),
-            textAlign: TextAlign.center,
+
+          const SectionHeader(
+            title: 'Dlaczego Warto Nas Wybrać?',
+            subtitle: 'Poczuj różnicę dzięki naszym usługom premium i dbałości o każdy detal',
           ),
-          const SizedBox(height: 16),
-          Text(
-            'Poczuj różnicę dzięki naszym usługom premium i dbałości o każdy detal',
-            style: TextStyle(
-              fontSize: 16,
-              color: Color(0xFF666666),
-            ),
-            textAlign: TextAlign.center,
-          ),
+
           const SizedBox(height: 50),
           LayoutBuilder(
             builder: (context, constraints) {

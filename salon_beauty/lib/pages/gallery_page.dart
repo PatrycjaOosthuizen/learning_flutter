@@ -3,6 +3,8 @@ import 'package:flutter/services.dart';
 import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
 import '../widgets/footer.dart';
+import '../widgets/section_header.dart';
+
 
 class GalleryPage extends StatefulWidget {
   const GalleryPage({super.key});
@@ -61,7 +63,12 @@ class _GalleryPageState extends State<GalleryPage> with TickerProviderStateMixin
             children: [
               const Navbar(),
               const SizedBox(height: 20),
-              _buildHeader(),
+
+              const SectionHeader(
+                title: 'Beauty Gallery',
+                subtitle: 'Discover our stunning nail art collection',
+
+              ),
               const SizedBox(height: 40),
               _buildGalleryGrid(),
               const SizedBox(height: 40),
@@ -74,41 +81,7 @@ class _GalleryPageState extends State<GalleryPage> with TickerProviderStateMixin
     );
   }
 
-  Widget _buildHeader() {
-    return Column(
-      children: [
-        const SizedBox(height: 20),
-        ShaderMask(
-          shaderCallback: (bounds) => LinearGradient(
-            colors: [AppColors.brown, AppColors.brown.withValues(alpha: 0.7)],
-            begin: Alignment.topLeft,
-            end: Alignment.bottomRight,
-          ).createShader(bounds),
-          child: const Text(
-            'Beauty Gallery',
-            style: TextStyle(
-              fontSize: 32,
-              fontWeight: FontWeight.w700,
-              color: Colors.white,
-              letterSpacing: -0.5,
-            ),
-            textAlign: TextAlign.center,
-          ),
-        ),
-        const SizedBox(height: 8),
-        Text(
-          'Discover our stunning nail art collection',
-          style: TextStyle(
-            fontSize: 16,
-            color: AppColors.brown.withValues(alpha: 0.7),
-            fontWeight: FontWeight.w500,
-          ),
-          textAlign: TextAlign.center,
-        ),
-        const SizedBox(height: 20),
-      ],
-    );
-  }
+
 
   Widget _buildGalleryGrid() {
     return FadeTransition(

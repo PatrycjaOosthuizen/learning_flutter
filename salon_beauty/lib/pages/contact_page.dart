@@ -3,6 +3,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
 import '../widgets/footer.dart';
+import '../widgets/section_header.dart';
+
 
 class ContactPage extends StatefulWidget {
   const ContactPage({super.key});
@@ -105,25 +107,11 @@ class _ContactPageState extends State<ContactPage> {
           constraints: const BoxConstraints(maxWidth: 800),
           child: Column(
             children: [
-              const Text(
-                'Odwiedź Nas',
-                style: TextStyle(
-                  fontSize: 32,
-                  fontWeight: FontWeight.bold,
-                  color: AppColors.brown,
-                ),
-                textAlign: TextAlign.center,
+              const SectionHeader(
+                title: 'Odwiedź Nas',
+                subtitle: 'Zapraszamy do naszego salonu piękności w Nałęczowie.',
               ),
-              const SizedBox(height: 16),
-              Text(
-                'Zapraszamy do naszego salonu piękności w Nałęczowie.',
-                style: TextStyle(
-                  fontSize: 16,
-                  color: AppColors.textColor.withValues(alpha: 0.8),
-                  height: 1.5,
-                ),
-                textAlign: TextAlign.center,
-              ),
+
             ],
           ),
         ),
