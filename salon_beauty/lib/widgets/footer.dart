@@ -90,7 +90,7 @@ class BeautyStudioFooter extends StatelessWidget {
                 color: Color(0xFFFBBF24),
                 shape: BoxShape.circle,
               ),
-              child: const Icon(Icons.add, color: Color(0xFF1F2937), size: 20),
+              child: const Icon(Icons.auto_awesome, color: Color(0xFF1F2937), size: 20),
             ),
             const SizedBox(width: 8),
             const Text(

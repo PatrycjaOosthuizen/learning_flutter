@@ -3,6 +3,7 @@ import '../theme/app_colors.dart';
 import '../widgets/navbar.dart';
 import '../widgets/footer.dart';
 import '../widgets/section_header.dart';
+import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 
 class ServicesPage extends StatelessWidget {
@@ -28,7 +29,7 @@ class ServicesPage extends StatelessWidget {
               const SizedBox(height: 30),
               _buildServiceCategory(
                 'Pielęgnacja twarzy',
-                Icons.face,
+                Icons.face_2,
                 [
                   _buildServiceSubcategory('ZABIEGI OCZYSZCZANIA TWARZY', [
                     ServiceItem('Oczyszczanie manualne + maska kremowa', '150,-'),
@@ -109,7 +110,7 @@ class ServicesPage extends StatelessWidget {
               ),
               _buildServiceCategory(
                 'Pielęgnacja stóp',
-                Icons.girl,
+                  MdiIcons.footPrint,
                 [
                   _buildServiceSubcategory('', [
                     ServiceItem('Pedicure kosmetyczny', '90,-'),
@@ -126,7 +127,7 @@ class ServicesPage extends StatelessWidget {
               ),
               _buildServiceCategory(
                 'Depilacja woskiem',
-                Icons.content_cut,
+                MdiIcons.razorDoubleEdge,
                 [
                   _buildServiceSubcategory('', [
                     ServiceItem('Wąsik / Bródka', '15,-/25,-'),
